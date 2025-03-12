@@ -7,8 +7,8 @@ pipeline {
         stage("NODE") {
             steps {
                 dir("src") {
-                    echo pwd
-                    sh "yarn install"
+                    def json = readFile(file: "test.json")
+                    echo "Printing... ${json}"
                 }
             }
         }
