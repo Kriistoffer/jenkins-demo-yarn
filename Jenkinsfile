@@ -11,7 +11,7 @@ pipeline {
                         def json = readFile(file: "test.json")
                         
                         def lines = json.readLines()
-                        def lastLine = lines.get(lines.size()-1)
+                        def lastLine = lines.get(lines.size()-2)
                         echo "${lastLine}"
                     }
                 }
