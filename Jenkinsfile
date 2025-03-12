@@ -10,7 +10,8 @@ pipeline {
                     dir("src") {
                         def json = readFile(file: "test.json")
                         
-                        def lines = json.split("\r?\n").readLines()
+                        def lines = json.split("\r?\n")
+                        lines = json.readLines()
                         def lastLine = lines.get(lines.size()-1)
                         echo "Printing lines... ${lines}"
                         echo "Printing lastLine... ${lastLine}"
