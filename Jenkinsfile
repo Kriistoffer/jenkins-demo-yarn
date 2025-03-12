@@ -9,6 +9,7 @@ pipeline {
                 script {
                     dir("src") {
                         def json = readFile(file: "test.json")
+                        json.split("\r?\n")
                         echo "Printing... ${json}"
                     }
                 }
