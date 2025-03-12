@@ -10,7 +10,7 @@ pipeline {
                     dir("src") {
                         def json = readFile(file: "test.json")
                         sh '''
-                        ls -l
+                        wc -l test.json
                         '''
                     }
                 }
