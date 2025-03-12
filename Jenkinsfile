@@ -9,7 +9,7 @@ pipeline {
                 script {
                     dir("src") {
                         def json = readFile(file: "test.json")
-                        json.split("\r?\n").trim()
+                        json.trim().split("\r?\n")
                         echo "Printing... ${json.size()}"
                     }
                 }
