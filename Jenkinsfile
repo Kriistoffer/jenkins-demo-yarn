@@ -9,7 +9,9 @@ pipeline {
                 script {
                     dir("src") {
                         def json = readFile(file: "test.json")
-                        sh "wc -l ${json}"
+                        sh '''
+                        ls -l
+                        '''
                     }
                 }
             }
