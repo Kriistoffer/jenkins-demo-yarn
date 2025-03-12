@@ -15,7 +15,7 @@ pipeline {
                         // def lastLine = lines.get(lines.size()-1)
                         // echo "Printing lines... ${lines}"
                         // echo "Printing lastLine... ${lastLine}"
-                        new File("test.json").eachLine { line -> 
+                        new File("${WORKSPACE}/src/test.json").eachLine { line -> 
                             echo "Printing... ${line}"
                         }
                     }
