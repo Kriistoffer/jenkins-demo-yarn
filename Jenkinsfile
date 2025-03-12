@@ -9,12 +9,16 @@ pipeline {
                 script {
                     dir("src") {
                         def json = readFile(file: "test.json")
+                        def lastLine
                         
-                        def lines = json.split("\r?\n")
-                        lines = json.readLines()
-                        def lastLine = lines.get(lines.size()-1)
-                        echo "Printing lines... ${lines}"
-                        echo "Printing lastLine... ${lastLine}"
+                        // def lines = json.split("\r?\n")
+                        // lines = json.readLines()
+                        // def lastLine = lines.get(lines.size()-1)
+                        // echo "Printing lines... ${lines}"
+                        // echo "Printing lastLine... ${lastLine}"
+                        new File("test.json").eachLine {
+                            lastLine = it
+                        }
                     }
                 }
             }
