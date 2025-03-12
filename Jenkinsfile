@@ -9,8 +9,6 @@ pipeline {
                 script {
                     dir("src") {
                         def json = readFile(file: "test.json")
-                        json.trim().split("\r?\n")
-                        echo "Printing... ${json.count()}"
                         sh "wc -l ${json}"
                     }
                 }
