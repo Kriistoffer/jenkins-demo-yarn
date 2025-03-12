@@ -6,9 +6,11 @@ pipeline {
     stages {
         stage("NODE") {
             steps {
-                dir("src") {
-                    def json = readFile(file: "test.json")
-                    echo "Printing... ${json}"
+                script {
+                    dir("src") {
+                        def json = readFile(file: "test.json")
+                        echo "Printing... ${json}"
+                    }
                 }
             }
         }
