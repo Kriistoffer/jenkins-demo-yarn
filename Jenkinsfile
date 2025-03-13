@@ -19,7 +19,9 @@ pipeline {
 
                     echo "Printing the last line: ${lastLine}"
 
-                    def myFile = new File("output.json").write(lastLine)
+                    def myFile = readJSON(file: "output.json")
+                    myFile.write(lastLine)
+                    // def myFile = new File("output.json").write(lastLine)
                     // myFile.write(lastLine)
                     // list.eachLine { line -> 
                     //     echo "Line: ${line}"
