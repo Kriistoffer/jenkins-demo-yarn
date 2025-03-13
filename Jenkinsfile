@@ -16,7 +16,12 @@ pipeline {
                         lastLine = item
                     }
 
-                    echo "Printing the last line: ${lastLine}"
+                    def newFile = new File("output.json")
+                    newFile.write("${lastLine}")
+
+                    def output = readJson("${WORKSPACE}/output.json")
+                    echo "Printing total number of high vuln: ${output.data.vulnerabilities.high}"
+                    // echo "Printing the last line: ${lastLine}"
                     // list.eachLine { line -> 
                     //     echo "Line: ${line}"
                     // }
