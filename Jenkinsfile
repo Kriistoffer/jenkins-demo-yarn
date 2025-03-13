@@ -8,9 +8,10 @@ pipeline {
             steps {
                 script {
                     def json = readFile(file: "test.json")
-                    json.tokenize("\r?\n").last()
-
-                    echo "Printing json... ${json}"
+                    
+                    json.eachLine { line -> 
+                        echo "Printing.... ${line}"
+                    }
                 }
             }
         }
