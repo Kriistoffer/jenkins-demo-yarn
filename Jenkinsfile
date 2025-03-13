@@ -17,12 +17,12 @@ pipeline {
                         echo "${lastLine} > output.json"
                     }
 
-                    echo "Printing the last line: ${lastLine}"
+                    echo "Printing the last line: ${lastLine.data}"
 
                     // def myFile = readJSON(file: "output.json")
                     // myFile.write(lastLine)
-                    def myFile = new File("output.json")
-                    myFile.append(lastLine)
+                    // def myFile = new File("output.json")
+                    // myFile.append(lastLine)
                 }
             }
         }
