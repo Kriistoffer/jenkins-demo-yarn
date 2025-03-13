@@ -7,10 +7,11 @@ pipeline {
         stage("NODE") {
             steps {
                 script {
-                    def json = readFile(file: "test.json")
+                    // def json = readFile(file: "test.json")
+                    def file = new File('test.json')
                     
-                    json.eachLine { line -> 
-                        echo "Printing.... ${line}"
+                    file.eachLine { line -> 
+                        echo "Line: ${line}"
                     }
                 }
             }
