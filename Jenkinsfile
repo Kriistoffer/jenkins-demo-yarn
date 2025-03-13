@@ -10,10 +10,13 @@ pipeline {
                     // def json = readFile(file: "test.json")
                     // def list = new File("${WORKSPACE}/test.txt").text.readLines()
                     def list = readFile("${WORKSPACE}/test.txt").readLines()
+                    def lastLine
 
                     for (item in list) {
-                        echo "Printing... ${item}"
+                        lastLine = item
                     }
+
+                    echo "Printing the last line: ${lastLine}"
                     // list.eachLine { line -> 
                     //     echo "Line: ${line}"
                     // }
