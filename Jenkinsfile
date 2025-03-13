@@ -11,9 +11,12 @@ pipeline {
                     // def list = new File("${WORKSPACE}/test.txt").text.readLines()
                     def list = readFile("${WORKSPACE}/test.txt").readLines()
 
-                    list.eachLine { line -> 
-                        echo "Line: ${line}"
+                    for (item in list) {
+                        echo "Printing... ${item}"
                     }
+                    // list.eachLine { line -> 
+                    //     echo "Line: ${line}"
+                    // }
                 }
             }
         }
