@@ -14,7 +14,7 @@ pipeline {
 
                     for (item in list) {
                         lastLine = item
-                        // lastLine > output.json
+                        echo "${lastLine} > output.json"
                     }
 
                     echo "Printing the last line: ${lastLine}"
