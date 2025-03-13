@@ -10,9 +10,10 @@ pipeline {
                     // def json = readFile(file: "test.json")
                     // def list = new File("${WORKSPACE}/test.txt").text.readLines()
                     def list = readFile("${WORKSPACE}/test.txt").readLines()
-
+                    def lastLine
+                    
                     for (item in list) {
-                        def lastLine = item
+                        lastLine = item
                         // lastLine > output.json
                     }
 
