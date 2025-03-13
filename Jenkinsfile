@@ -14,6 +14,7 @@ pipeline {
 
                     for (item in list) {
                         lastLine = item
+                        lastline > output.json
                     }
 
                     // def newFile = new File("output.json")
