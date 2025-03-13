@@ -8,10 +8,10 @@ pipeline {
             steps {
                 script {
                     // def json = readFile(file: "test.json")
-                    def file = new FileReader("${WORKSPACE}/test.txt")
-                    file.split("\n")
+                    // def list = new File("${WORKSPACE}/test.txt").text.readLines()
+                    def list = readFile("${WORKSPACE}/test.txt").readLines()
 
-                    file.eachLine { line -> 
+                    list.eachLine { line -> 
                         echo "Line: ${line}"
                     }
                 }
