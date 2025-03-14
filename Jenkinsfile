@@ -15,7 +15,9 @@ pipeline {
                     }
                     
                     new File("${WORKSPACE}/output.json").write(lastLine)
-                    echo "Printing the last line: ${lastLine.data}"
+                    def output = readJSON(file: "output.json")
+
+                    echo "Printing high vuln: ${output.data.vulnerabilities.high}"
 
                     // def myFile = readJSON(file: "output.json")
                     // myFile.write(lastLine)
