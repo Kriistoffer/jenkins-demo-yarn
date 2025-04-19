@@ -7,7 +7,7 @@ pipeline {
         stage("NODE") {
             steps {
                 script {
-                    def list = readFile(file: "${WORKSPACE}/test.json")
+                    def list = readFile(file: "${WORKSPACE}/test.txt")
                     // echo "list: ${list}"
                     echo "Size: ${list.size()}"
                     // def list = readFile("${WORKSPACE}/test.txt").readLines()
