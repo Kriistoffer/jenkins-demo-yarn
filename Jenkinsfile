@@ -10,7 +10,7 @@ pipeline {
                     sh "grep 'auditSummary' ${WORKSPACE}/test.json" > realoutput.json
                     def output = readJSON(file: "${WORKSPACE}/realoutput.json")
 
-                    echo "Totaldependencies: ${output.data.totalDependencies}"
+                    echo "Totaldependencies: ${output}"
 
 
                     // def list = readFile("${WORKSPACE}/test.txt").readLines()
