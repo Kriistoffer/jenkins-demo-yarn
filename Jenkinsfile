@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     def list = readJSON(file: "${WORKSPACE}/test.json")
-                    echo "list size: ${list.size()}"
+                    echo "list: ${list}"
                     // def list = readFile("${WORKSPACE}/test.txt").readLines()
                     // def lastLine
 
