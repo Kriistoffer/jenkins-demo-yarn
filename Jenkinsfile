@@ -7,17 +7,19 @@ pipeline {
         stage("NODE") {
             steps {
                 script {
-                    def list = readFile("${WORKSPACE}/test.txt").readLines()
-                    def lastLine
+                    def list = readJSON(file: "${WORKSPACE}/test.json")
+                    echo "list size: ${list.size()}"
+                    // def list = readFile("${WORKSPACE}/test.txt").readLines()
+                    // def lastLine
 
-                    for (item in list) {
-                        lastLine = item
-                    }
+                    // for (item in list) {
+                    //     lastLine = item
+                    // }
                     
-                    new File("${WORKSPACE}/output.json").write(lastLine)
-                    def output = readJSON(file: "output.json")
+                    // new File("${WORKSPACE}/output.json").write(lastLine)
+                    // def output = readJSON(file: "output.json")
 
-                    echo "Printing high vuln: ${output.data.vulnerabilities.high}"
+                    // echo "Printing high vuln: ${output.data.vulnerabilities.high}"
 
                     // def myFile = readJSON(file: "output.json")
                     // myFile.write(lastLine)
