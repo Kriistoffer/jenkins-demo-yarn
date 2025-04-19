@@ -7,7 +7,7 @@ pipeline {
         stage("NODE") {
             steps {
                 script {
-                    sh "grep "type":"auditSummary" ${WORKSPACE}/test.json"
+                    sh "grep 'auditSummary' ${WORKSPACE}/test.json"
 
 
                     // def list = readFile("${WORKSPACE}/test.txt").readLines()
