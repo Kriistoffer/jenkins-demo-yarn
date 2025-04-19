@@ -7,7 +7,7 @@ pipeline {
         stage("NODE") {
             steps {
                 script {
-                    sh "grep 'auditSummary' ${WORKSPACE}/test.json" > realoutput.json
+                    sh "grep 'auditSummary' ${WORKSPACE}/test.json > realoutput.json"
                     def output = readJSON(file: "${WORKSPACE}/realoutput.json")
 
                     echo "Totaldependencies: ${output}"
