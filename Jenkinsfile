@@ -12,23 +12,39 @@ pipeline {
 
                     echo "Totaldependencies: ${output.data.totalDependencies}"
 
+                    powershell """
+                    $SOLUTIONROOT = "${WORKSPACE}"
+                    Function ListAllPackages ($BaseDirectory)
 
-                    // def list = readFile("${WORKSPACE}/test.txt").readLines()
-                    // def lastLine
+                    {
 
-                    // for (item in list) {
-                    //     lastLine = item
-                    // }
-                    
-                    // new File("${WORKSPACE}/output.json").write(lastLine)
-                    // def output = readJSON(file: "output.json")
+                        Write-Host "Starting Package List - This may take a few minutes ..."
 
-                    // echo "Printing high vuln: ${output.data.vulnerabilities.high}"
+                        $PACKAGECONFIGS = Get-ChildItem -Recurse -Force $BaseDirectory -ErrorAction SilentlyContinue |
 
-                    // def myFile = readJSON(file: "output.json")
-                    // myFile.write(lastLine)
-                    // def myFile = new File("output.json")
-                    // myFile.append(lastLine)
+                            Where-Object { ($_.PSIsContainer -eq $false) -and  ( $_.Name -eq "packages.config")}
+
+                        ForEach($PACKAGECONFIG in $PACKAGECONFIGS)
+
+                        {
+
+                            $path = $PACKAGECONFIG.FullName
+
+                            $xml = [xml]$packages = Get-Content $path
+
+                            foreach($package in $packages.packages.package)
+
+                            {
+
+                                Write-Host "$($package.id) - $($package.version)"
+
+                            }
+
+                        }
+
+                    }
+                    ListAllPackages $SOLUTIONROOT
+                    """
                 }
             }
         }
