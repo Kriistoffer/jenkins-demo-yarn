@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     echo "Workspace dir: ${WORKSPACE}"
-                    powershell "scanPackages.ps1 -rootDirectory '/var/jenkins_home/workspace/jenkins-demo-yarn'"
+                    powershell "scanPackages.ps1"
                 }
             }
         }

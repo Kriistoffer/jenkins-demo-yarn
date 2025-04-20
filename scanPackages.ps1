@@ -1,9 +1,9 @@
 param(
-	[Parameter(mandatory)]
+	#[Parameter(mandatory)]
 	[string]$rootDirectory
 )
 
-$SOLUTIONROOT = "$rootDirectory"
+$SOLUTIONROOT = "/var/jenkins_home/workspace/jenkins-demo-yarn"
 Function ListAllPackages ($BaseDirectory)
 
 {
