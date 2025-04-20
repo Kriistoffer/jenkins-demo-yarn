@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     echo "Workspace dir: ${WORKSPACE}"
-                    powershell "${WORKSPACE}/scanPackages.ps1 -rootDirectory "${WORKSPACE}/""
+                    powershell "${WORKSPACE}/scanPackages.ps1 -rootDirectory '/'"
                 }
             }
         }
