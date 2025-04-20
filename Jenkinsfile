@@ -7,7 +7,7 @@ pipeline {
         stage("NODE") {
             steps {
                 script {
-                    powershell "scanPackages.ps1 -rootDirectory "${WORKSPACE}""
+                    powershell "${WORKSPACE}/scanPackages.ps1 -rootDirectory "${WORKSPACE}""
                 }
             }
         }
