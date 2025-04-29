@@ -3,37 +3,43 @@ pipeline {
     
     stages {
         stage ("Setup") {
-            script {
-                if (!fileExists("logs")) {
-                    sh "mkdir logs"
-                }
+            steps {
+                script {
+                    if (!fileExists("logs")) {
+                        sh "mkdir logs"
+                    }
 
-                env.allRepositories.tokenize(",").each { repo ->
-                    git branch: "${env.BRANCH}", credentialsId: "${env.CREDENTIALS}", url: "${env.baseUrl}/${repo}"
+                    env.allRepositories.tokenize(",").each { repo ->
+                        git branch: "${env.BRANCH}", credentialsId: "${env.CREDENTIALS}", url: "${env.baseUrl}/${repo}"
+                    }
                 }
             }
         }
         stage ("Node") {
-            // def fileToFind = "package-lock.json"
-            def files = findFiles(glob: "**/package-lock.json")
+            steps {
+                script {
+                    // def fileToFind = "package-lock.json"
+                    def files = findFiles(glob: "**/package-lock.json")
 
-            //Wrappa docker
-            for (file in files) {
-                def parentDirectory = "${file[0].path}" - "/${file[0].name}"
-                dir("${parentDirectory}") {
-                    echo "ParentDirectory: ${parentDirectory}"
-                    // sh "${env.PACKAGEMANAGER} install"
-                    // sh "${env.PACKAGEMANAGER} audit"
-                    // sh "${env.PACKAGEMANAGER} outdated"
+                    //Wrappa docker
+                    for (file in files) {
+                        def parentDirectory = "${file[0].path}" - "/${file[0].name}"
+                        dir("${parentDirectory}") {
+                            echo "ParentDirectory: ${parentDirectory}"
+                            // sh "${env.PACKAGEMANAGER} install"
+                            // sh "${env.PACKAGEMANAGER} audit"
+                            // sh "${env.PACKAGEMANAGER} outdated"
 
-                    if ("${env.PACKAGEMANAGER}" == "npm") {
-                        //NPM STEPS
-                        //SLACKSEND
-                        echo "NPM"
-                    } else {
-                        //YARN STEPS
-                        //SLACKSEND
-                        echo "YARN"
+                            if ("${env.PACKAGEMANAGER}" == "npm") {
+                                //NPM STEPS
+                                //SLACKSEND
+                                echo "NPM"
+                            } else {
+                                //YARN STEPS
+                                //SLACKSEND
+                                echo "YARN"
+                            }
+                        }
                     }
                 }
             }
