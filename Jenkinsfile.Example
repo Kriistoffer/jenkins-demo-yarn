@@ -1,0 +1,83 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage ("Setup") {
+            script {
+                if !fileExists("logs") {
+                    sh "mkdir logs"
+                }
+
+                env.allRepositories.tokenize(",").each { repo ->
+                    git branch: "${env.BRANCH}", credentialsId: "${env.CREDENTIALS}", url: "${env.baseUrl}/${repo}"
+                }
+            }
+        }
+        stage ("Node") {
+            // def fileToFind = "package-lock.json"
+            def files = findFiles(glob: "**/package-lock.json")
+
+            //Wrappa docker
+            for (file in files) {
+                def parentDirectory = "${file[0].path}" - "/${file[0].name}"
+                dir("${parentDirectory}") {
+                    echo "ParentDirectory: ${parentDirectory}"
+                    // sh "${env.PACKAGEMANAGER} install"
+                    // sh "${env.PACKAGEMANAGER} audit"
+                    // sh "${env.PACKAGEMANAGER} outdated"
+
+                    if ("${env.PACKAGEMANAGER}" == "npm") {
+                        //NPM STEPS
+                        //SLACKSEND
+                        echo "NPM"
+                    } else {
+                        //YARN STEPS
+                        //SLACKSEND
+                        echo "YARN"
+                    }
+                }
+            }
+        }
+        // stage ("Dotnet") {
+        //     def files = findFiles(glob: "**/*.sln")
+
+        //     //Wrappa docker
+        //     for (file in files) {
+        //         sh "dotnet restore ${file.path}"
+        //         sh "dotnet list package ${file.path} --vulnerable --include transitive"
+        //         sh "dotnet list package ${file.path} --outdated"
+
+        //         //DOTNET STEPS, COUNT VULNERABILITIES, OUTDATED
+        //         //SLACKSEND
+
+        //         sh "grep 'auditSummary' filnamn > sparaifil.json"
+        //     }
+        // }
+    }
+}
+
+// repo-namn/*.sln
+// repo-namn/*/*.sln
+
+// buh-app/buh-gui/src/package-lock.json
+
+
+// def parentDirectory
+// dir("${project}") {
+//     def files = findFiles(glob: "**/package-lock.json")
+//     parentDirectory = "${file[0].path}" - "/${file[0].name}"
+// }
+
+// dir("${parentDirectory}") {
+//     if (env.PACKETMANAGER == "npm") {
+//         sh "npm install"
+//         sh "npm audit"
+//         sh "npm outdated"
+//     } else {
+//         sh "yarn install"
+//         sh "yarn audit"
+//         sh "yarn outdated"
+//     }
+
+//     //SLACKSEND HERE
+// }  
