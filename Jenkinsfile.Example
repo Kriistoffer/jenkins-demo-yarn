@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage ("Setup") {
             script {
-                if !fileExists("logs") {
+                if (!fileExists("logs")) {
                     sh "mkdir logs"
                 }
 
